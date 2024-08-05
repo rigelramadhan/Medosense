@@ -1,4 +1,4 @@
-package one.reevdev.medosense.ui.theme
+package one.reevdev.medosense.feature.common.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
