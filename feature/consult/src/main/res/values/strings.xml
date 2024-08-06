@@ -6,4 +6,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="message_analyzing_your_symptoms">Analyzing your symptoms...</string>
+    <string name="message_based_on_my_analysis">Based on my analysis, you are having</string>
+    <string name="label_recommended_medicine">Recommended Medicine</string>
+    <string name="label_confirm">Confirm</string>
 </resources>

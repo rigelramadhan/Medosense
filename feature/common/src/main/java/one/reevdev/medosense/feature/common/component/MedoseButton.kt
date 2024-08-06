@@ -4,10 +4,12 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 
 @Composable
 fun MedoseButton(
@@ -46,10 +48,11 @@ fun TonalMedoseButton(
 }
 
 @Composable
-fun OutlinedDosenseButton(
+fun OutlinedMedoseButton(
     modifier: Modifier = Modifier,
     text: String,
     colors: ButtonColors = ButtonDefaults.outlinedButtonColors(),
+    image: ImageVector? = null,
     enableIf: () -> Boolean = { true },
     onClick: () -> Unit,
 ) {
@@ -59,6 +62,9 @@ fun OutlinedDosenseButton(
         colors = colors,
         enabled = enableIf()
     ) {
+        image?.let {
+            Icon(imageVector = image, contentDescription = null)
+        }
         Text(text = text)
     }
 }
