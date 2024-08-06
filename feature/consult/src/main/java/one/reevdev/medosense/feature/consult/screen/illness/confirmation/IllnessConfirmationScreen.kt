@@ -20,11 +20,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import one.reevdev.medosense.core.common.utils.emptyString
 import one.reevdev.medosense.feature.common.component.MedoseButton
 import one.reevdev.medosense.feature.common.component.TonalMedoseButton
 import one.reevdev.medosense.feature.common.theme.MedosenseTheme
 import one.reevdev.medosense.feature.common.theme.appColors
-import one.reevdev.medosense.feature.common.utils.emptyString
 import one.reevdev.medosense.feature.consult.R
 
 @Composable

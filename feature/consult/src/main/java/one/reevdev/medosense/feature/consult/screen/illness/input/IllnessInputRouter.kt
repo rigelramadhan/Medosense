@@ -14,10 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.tooling.preview.Preview
+import one.reevdev.medosense.core.common.utils.emptyString
 import one.reevdev.medosense.feature.common.component.AppHeader
 import one.reevdev.medosense.feature.common.theme.MedosenseTheme
 import one.reevdev.medosense.feature.common.theme.appColors
-import one.reevdev.medosense.feature.common.utils.emptyString
 
 @Composable
 fun IllnessInputRouter(
