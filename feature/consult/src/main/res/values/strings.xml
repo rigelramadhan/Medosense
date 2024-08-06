@@ -3,4 +3,7 @@
     <string name="message_tell_me">Tell me what you\'re feeling right now</string>
     <string name="label_symptoms">Symptoms</string>
     <string name="action_continue">Continue</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="message_analyzing_your_symptoms">Analyzing your symptoms...</string>
 </resources>
