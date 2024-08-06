@@ -9,4 +9,7 @@
     <string name="message_based_on_my_analysis">Based on my analysis, you are having</string>
     <string name="label_recommended_medicine">Recommended Medicine</string>
     <string name="label_confirm">Confirm</string>
+    <string name="content_description_gallery_button">Gallery button</string>
+    <string name="content_description_flip_camera_button">Flip camera button</string>
+    <string name="content_description_capture_image">Capture image button</string>
 </resources>
