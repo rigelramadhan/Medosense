@@ -5,9 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,11 +17,9 @@ import one.reevdev.medosense.feature.common.theme.appColors
 @Composable
 fun IllnessConfirmationRouter(
     modifier: Modifier = Modifier,
-    onNoClick: () -> Unit,
-    onYesClick: () -> Unit,
+    question: String = emptyString(),
+    onButtonClick: (isYes: Boolean) -> Unit,
 ) {
-    val question by remember { mutableStateOf(emptyString()) }
-
     Scaffold(
         modifier = modifier
             .fillMaxSize(),
@@ -45,8 +40,7 @@ fun IllnessConfirmationRouter(
         ) {
             IllnessConfirmationScreen(
                 question = question,
-                onYesClick = onYesClick,
-                onNoClick = onNoClick
+                onButtonClick = onButtonClick
             )
         }
     }
@@ -57,8 +51,7 @@ fun IllnessConfirmationRouter(
 private fun IllnessConfirmationRouterPreview() {
     MedosenseTheme {
         IllnessConfirmationRouter(
-            onNoClick = {},
-            onYesClick = {}
+            onButtonClick = {}
         )
     }
 }

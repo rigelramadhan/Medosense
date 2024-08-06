@@ -1,4 +1,4 @@
-package one.reevdev.medosense.feature.consult.screen.illness.input
+package one.reevdev.medosense.feature.consult.screen.illness
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -22,7 +22,7 @@ import one.reevdev.medosense.feature.common.theme.appColors
 @Composable
 fun IllnessInputRouter(
     modifier: Modifier = Modifier,
-    onContinueClick: () -> Unit,
+    onContinueClick: (String) -> Unit,
 ) {
     val (symptoms, onSymptomsValueChange) = remember { mutableStateOf(emptyString()) }
 
@@ -67,7 +67,7 @@ fun IllnessInputRouter(
                     .align(Alignment.Center),
                 symptoms = symptoms,
                 onSymptomsValueChange = onSymptomsValueChange,
-                onContinueClick = onContinueClick
+                onContinueClick = { onContinueClick(symptoms) }
             )
         }
     }

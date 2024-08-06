@@ -3,6 +3,8 @@ package one.reevdev.medosense.feature.consult.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import one.reevdev.medosense.core.domain.feature.consult.model.IllnessAnalysis
+import one.reevdev.medosense.feature.consult.screen.illness.IllnessRouter
 import one.reevdev.medosense.feature.consult.screen.illness.confirmation.IllnessConfirmationRouter
 import one.reevdev.medosense.feature.consult.screen.illness.input.IllnessInputRouter
 
@@ -11,7 +13,7 @@ fun NavController.navigateToInputIllness() {
 }
 
 fun NavGraphBuilder.inputIllnessScreen(
-    onContinueClick: () -> Unit
+    onContinueClick: (String) -> Unit
 ) {
     composable<ConsultRoutes.InputIllness> {
         IllnessInputRouter(
@@ -25,13 +27,27 @@ fun NavController.navigateToIllnessConfirmation() {
 }
 
 fun NavGraphBuilder.illnessConfirmationScreen(
-    onYesClick: () -> Unit,
-    onNoClick: () -> Unit
+    question: String,
+    onButtonClick: (isYes: Boolean) -> Unit
 ) {
     composable<ConsultRoutes.Confirmation> {
         IllnessConfirmationRouter(
-            onYesClick = onYesClick,
-            onNoClick = onNoClick
+            question = question,
+            onButtonClick = onButtonClick
+        )
+    }
+}
+
+fun NavController.navigateToIllnessRouter() {
+    navigate(ConsultRoutes.IllnessRouter)
+}
+
+fun NavGraphBuilder.illnessRouter(
+    onAnalysisResultAvailable: (IllnessAnalysis) -> Unit
+) {
+    composable<ConsultRoutes.IllnessRouter> {
+        IllnessRouter(
+            onAnalysisResultAvailable = onAnalysisResultAvailable
         )
     }
 }

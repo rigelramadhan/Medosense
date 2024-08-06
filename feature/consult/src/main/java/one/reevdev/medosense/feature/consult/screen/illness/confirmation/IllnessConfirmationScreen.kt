@@ -31,8 +31,7 @@ import one.reevdev.medosense.feature.consult.R
 fun IllnessConfirmationScreen(
     modifier: Modifier = Modifier,
     question: String,
-    onYesClick: () -> Unit,
-    onNoClick: () -> Unit,
+    onButtonClick: (isYes: Boolean) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -91,13 +90,13 @@ fun IllnessConfirmationScreen(
                             modifier = Modifier
                                 .weight(1f),
                             text = stringResource(R.string.no),
-                            onClick = onNoClick
+                            onClick = { onButtonClick(false) }
                         )
                         MedoseButton(
                             modifier = Modifier
                                 .weight(1f),
                             text = stringResource(R.string.yes),
-                            onClick = onYesClick
+                            onClick = { onButtonClick(true) }
                         )
                     }
                 }
@@ -112,8 +111,7 @@ private fun IllnessConfirmationScreenPreview() {
     MedosenseTheme {
         IllnessConfirmationScreen(
             question = "Are you feeling some type of dizziness in your front area of your head?",
-            onYesClick = {},
-            onNoClick = {}
+            onButtonClick = {}
         )
     }
 }
@@ -124,8 +122,7 @@ private fun IllnessConfirmationScreenPreview_NotReady() {
     MedosenseTheme {
         IllnessConfirmationScreen(
             question = emptyString(),
-            onYesClick = {},
-            onNoClick = {}
+            onButtonClick = {},
         )
     }
 }

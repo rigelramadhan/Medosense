@@ -10,4 +10,7 @@ object ConsultRoutes {
 
     @Serializable
     data object Confirmation : Route
+
+    @Serializable
+    data object IllnessRouter : Route
 }
