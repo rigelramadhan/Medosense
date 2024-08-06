@@ -38,7 +38,9 @@ fun AnalysisResultScreen(
     modifier: Modifier = Modifier,
     illness: String,
     confidenceLevel: Double,
-    prescriptions: List<Prescription>
+    prescriptions: List<Prescription>,
+    onConfirmClick: () -> Unit,
+    onContinueClick: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -131,13 +133,13 @@ fun AnalysisResultScreen(
                                 .weight(1f),
                             text = stringResource(R.string.label_confirm),
                             image = Icons.Rounded.PhotoCamera,
-                            onClick = {}
+                            onClick = onConfirmClick
                         )
                         MedoseButton(
                             modifier = Modifier
                                 .weight(1f),
                             text = stringResource(R.string.action_continue),
-                            onClick = {}
+                            onClick = onContinueClick
                         )
                     }
                 }
@@ -164,7 +166,9 @@ private fun AnalysisResultScreenPreview() {
                 prescription,
                 prescription,
                 prescription,
-            )
+            ),
+            onConfirmClick = {},
+            onContinueClick = {}
         )
     }
 }

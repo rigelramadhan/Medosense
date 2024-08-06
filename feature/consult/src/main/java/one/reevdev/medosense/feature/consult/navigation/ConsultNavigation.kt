@@ -3,10 +3,13 @@ package one.reevdev.medosense.feature.consult.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import one.reevdev.medosense.core.domain.feature.consult.model.IllnessAnalysis
+import one.reevdev.medosense.feature.consult.screen.analysis.AnalysisResultRouter
 import one.reevdev.medosense.feature.consult.screen.illness.IllnessRouter
 import one.reevdev.medosense.feature.consult.screen.illness.confirmation.IllnessConfirmationRouter
 import one.reevdev.medosense.feature.consult.screen.illness.input.IllnessInputRouter
+import kotlin.reflect.typeOf
 
 fun NavController.navigateToInputIllness() {
     navigate(ConsultRoutes.InputIllness)
@@ -48,6 +51,26 @@ fun NavGraphBuilder.illnessRouter(
     composable<ConsultRoutes.IllnessRouter> {
         IllnessRouter(
             onAnalysisResultAvailable = onAnalysisResultAvailable
+        )
+    }
+}
+
+fun NavController.navigateToAnalysisResult(analysis: IllnessAnalysis) {
+    navigate(ConsultRoutes.AnalysisResult(analysis))
+}
+
+fun NavGraphBuilder.analysisResultScreen(
+    onConfirmClick: () -> Unit,
+    onContinueClick: () -> Unit
+) {
+    composable<ConsultRoutes.AnalysisResult>(
+        typeMap = mapOf(typeOf<IllnessAnalysis>() to AnalysisResultParameterType)
+    ) {
+        val analysis = it.toRoute<ConsultRoutes.AnalysisResult>().analysis
+        AnalysisResultRouter(
+            analysis = analysis,
+            onConfirmClick = onConfirmClick,
+            onContinueClick = onContinueClick
         )
     }
 }
