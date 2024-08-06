@@ -1,7 +1,6 @@
 package one.reevdev.medosense.feature.common.theme
 
 import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -88,9 +87,9 @@ private val darkScheme = darkColorScheme(
 
 @Composable
 fun MedosenseTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = false,
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -111,7 +110,7 @@ fun MedosenseTheme(
 }
 
 @Composable
-fun AppColors() = MaterialTheme.colorScheme
+fun appColors() = MaterialTheme.colorScheme
 
 @Composable
-fun AppTypography() = MaterialTheme.typography
+fun appTypography() = MaterialTheme.typography

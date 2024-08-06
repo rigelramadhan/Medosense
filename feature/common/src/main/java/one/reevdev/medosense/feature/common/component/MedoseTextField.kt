@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,14 +20,15 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import one.reevdev.medosense.feature.common.theme.AppColors
 import one.reevdev.medosense.feature.common.theme.MedosenseTheme
+import one.reevdev.medosense.feature.common.theme.appColors
 
 @Composable
-fun DosenseTextField(
+fun MedoseTextField(
     modifier: Modifier = Modifier,
     label: String,
     value: String,
+    colors: TextFieldColors = medoseTextFieldColors(),
     keyboardType: KeyboardType = KeyboardType.Text,
     isValueVisible: Boolean = true,
     prefix: String? = null,
@@ -56,19 +58,22 @@ fun DosenseTextField(
         label = {
             Text(text = label)
         },
-        colors = TextFieldDefaults.colors(
-            unfocusedIndicatorColor = Color.Transparent,
-            focusedContainerColor = AppColors().surfaceContainerLow,
-            unfocusedContainerColor = AppColors().surfaceContainerLow
-        ),
+        colors = colors,
     )
 }
+
+@Composable
+fun medoseTextFieldColors() = TextFieldDefaults.colors(
+    unfocusedIndicatorColor = Color.Transparent,
+    focusedContainerColor = appColors().surfaceContainerLow,
+    unfocusedContainerColor = appColors().surfaceContainer
+)
 
 @Preview(showBackground = true)
 @Composable
 private fun DosenseTextFieldPreview() {
     MedosenseTheme {
-        DosenseTextField(
+        MedoseTextField(
             value = "Adama Traore",
             label = "Name",
             prefix = "Mr.",

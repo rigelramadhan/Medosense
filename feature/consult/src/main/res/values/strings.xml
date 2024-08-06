@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="message_tell_me">Tell me what you\'re feeling right now</string>
+    <string name="label_symptoms">Symptoms</string>
+    <string name="action_continue">Continue</string>
+</resources>

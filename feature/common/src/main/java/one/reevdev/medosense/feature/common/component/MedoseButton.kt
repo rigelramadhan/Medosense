@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun DosenseButton(
+fun MedoseButton(
     modifier: Modifier = Modifier,
     text: String,
     colors: ButtonColors = ButtonDefaults.buttonColors(),
