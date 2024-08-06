@@ -31,6 +31,7 @@ fun IllnessInputScreen(
     modifier: Modifier = Modifier,
     symptoms: String,
     onSymptomsValueChange: (String) -> Unit,
+    onContinueClick: () -> Unit,
 ) {
     Column(
         modifier = modifier,
@@ -73,10 +74,9 @@ fun IllnessInputScreen(
                 text = stringResource(R.string.action_continue),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = appColors().primary
-                )
-            ) {
-
-            }
+                ),
+                onClick = onContinueClick
+            )
         }
     }
 }
@@ -87,7 +87,8 @@ private fun IllnessInputScreenPreview() {
     MedosenseTheme {
         IllnessInputScreen(
             symptoms = "",
-            onSymptomsValueChange = {}
+            onSymptomsValueChange = {},
+            onContinueClick = {}
         )
     }
 }

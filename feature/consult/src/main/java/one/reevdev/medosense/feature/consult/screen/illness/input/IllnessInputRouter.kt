@@ -20,7 +20,10 @@ import one.reevdev.medosense.feature.common.theme.appColors
 import one.reevdev.medosense.feature.common.utils.emptyString
 
 @Composable
-fun IllnessInputRouter(modifier: Modifier = Modifier) {
+fun IllnessInputRouter(
+    modifier: Modifier = Modifier,
+    onContinueClick: () -> Unit,
+) {
     val (symptoms, onSymptomsValueChange) = remember { mutableStateOf(emptyString()) }
 
     Scaffold(
@@ -63,7 +66,8 @@ fun IllnessInputRouter(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .align(Alignment.Center),
                 symptoms = symptoms,
-                onSymptomsValueChange = onSymptomsValueChange
+                onSymptomsValueChange = onSymptomsValueChange,
+                onContinueClick = onContinueClick
             )
         }
     }
@@ -73,6 +77,8 @@ fun IllnessInputRouter(modifier: Modifier = Modifier) {
 @Composable
 private fun IllnessInputRouterPreview() {
     MedosenseTheme {
-        IllnessInputRouter()
+        IllnessInputRouter(
+            onContinueClick = {}
+        )
     }
 }
