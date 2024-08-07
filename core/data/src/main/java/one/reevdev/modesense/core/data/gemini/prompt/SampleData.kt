@@ -2,13 +2,13 @@ package one.reevdev.modesense.core.data.gemini.prompt
 
 import one.reevdev.medosense.core.common.utils.emptyString
 import one.reevdev.modesense.core.data.gemini.model.DiggingResponse
-import one.reevdev.modesense.core.data.gemini.model.IllnessAnalysis
+import one.reevdev.modesense.core.data.gemini.model.IllnessAnalysisData
 import one.reevdev.modesense.core.data.gemini.model.MedicineConfirmationResponse
-import one.reevdev.modesense.core.data.gemini.model.Prescription
+import one.reevdev.modesense.core.data.gemini.model.PrescriptionData
 
 object SampleData {
 
-    val prescription = Prescription(
+    val prescription = PrescriptionData(
         medicine = "Paracetamol",
         dosage = "500mg",
         frequency = "Once a day",
@@ -16,7 +16,7 @@ object SampleData {
         notes = "Take with food"
     )
 
-    val illnessAnalysis = IllnessAnalysis(
+    val illnessAnalysis = IllnessAnalysisData(
         illness = "Influenza",
         confidenceLevel = 0.95,
         prescription = listOf(prescription)

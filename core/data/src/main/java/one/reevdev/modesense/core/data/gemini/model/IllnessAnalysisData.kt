@@ -1,7 +1,7 @@
 package one.reevdev.modesense.core.data.gemini.model
 
-data class IllnessAnalysis(
+data class IllnessAnalysisData(
     val illness: String,
     val confidenceLevel: Double,
-    val prescription: List<Prescription>
+    val prescription: List<PrescriptionData>
 )

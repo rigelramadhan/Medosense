@@ -3,6 +3,7 @@ package one.reevdev.medosense.feature.consult.screen.medicine.confirmmedicine
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -19,6 +20,10 @@ fun ConfirmMedicineRouter(
     onContinueClick: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(key1 = Unit) {
+        uiState.photo?.let { viewModel.confirmMedicine(it) }
+    }
 
     Scaffold(
         modifier = modifier,

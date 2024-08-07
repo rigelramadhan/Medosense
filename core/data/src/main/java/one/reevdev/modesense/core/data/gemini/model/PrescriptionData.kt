@@ -1,6 +1,6 @@
 package one.reevdev.modesense.core.data.gemini.model
 
-data class Prescription(
+data class PrescriptionData(
     val medicine: String,
     val dosage: String,
     val frequency: String,
