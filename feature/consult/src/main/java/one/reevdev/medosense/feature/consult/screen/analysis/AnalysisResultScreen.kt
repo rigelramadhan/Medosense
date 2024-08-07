@@ -88,7 +88,8 @@ fun AnalysisResultScreen(
                             Row(
                                 modifier = Modifier
                                     .padding(12.dp)
-                                    .fillMaxWidth()
+                                    .fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
                                     modifier = Modifier
@@ -105,6 +106,11 @@ fun AnalysisResultScreen(
                                 )
                             }
                         }
+                    }
+                }
+
+                if (prescriptions.isNotEmpty()) {
+                    item {
                         Text(
                             modifier = Modifier
                                 .padding(top = 28.dp),
@@ -112,14 +118,14 @@ fun AnalysisResultScreen(
                             style = appTypography().labelMedium
                         )
                     }
-                }
 
-                itemsIndexed(prescriptions) { index, item ->
-                    PrescriptionItem(
-                        modifier = Modifier.padding(top = 4.dp),
-                        index = index.plus(1),
-                        prescription = item
-                    )
+                    itemsIndexed(prescriptions) { index, item ->
+                        PrescriptionItem(
+                            modifier = Modifier.padding(top = 4.dp),
+                            index = index.plus(1),
+                            prescription = item
+                        )
+                    }
                 }
 
                 item {
@@ -128,13 +134,15 @@ fun AnalysisResultScreen(
                             .padding(top = 32.dp),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        OutlinedMedoseButton(
-                            modifier = Modifier
-                                .weight(1f),
-                            text = stringResource(R.string.label_confirm),
-                            image = Icons.Rounded.PhotoCamera,
-                            onClick = onConfirmClick
-                        )
+                        if (prescriptions.isNotEmpty()) {
+                            OutlinedMedoseButton(
+                                modifier = Modifier
+                                    .weight(1f),
+                                text = stringResource(R.string.label_confirm),
+                                image = Icons.Rounded.PhotoCamera,
+                                onClick = onConfirmClick
+                            )
+                        }
                         MedoseButton(
                             modifier = Modifier
                                 .weight(1f),
@@ -167,6 +175,20 @@ private fun AnalysisResultScreenPreview() {
                 prescription,
                 prescription,
             ),
+            onConfirmClick = {},
+            onContinueClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFF8C4A60)
+@Composable
+private fun AnalysisResultScreenPreview_EmptyPrescription() {
+    MedosenseTheme {
+        AnalysisResultScreen(
+            illness = "Daydream Fever",
+            confidenceLevel = 0.85,
+            prescriptions = listOf(),
             onConfirmClick = {},
             onContinueClick = {}
         )

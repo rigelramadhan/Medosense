@@ -54,7 +54,6 @@ dependencies {
     implementation(libs.retrofit)
     implementation (libs.converter.gson)
     implementation(libs.gson)
-    implementation(libs.retrosheet)
     implementation(libs.androidx.datastore.preferences)
 
     implementation(libs.androidx.room.runtime)

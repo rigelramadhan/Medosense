@@ -18,6 +18,7 @@ import one.reevdev.medosense.feature.common.theme.appColors
 fun IllnessConfirmationRouter(
     modifier: Modifier = Modifier,
     question: String = emptyString(),
+    isLoading: Boolean = false,
     onButtonClick: (isYes: Boolean) -> Unit,
 ) {
     Scaffold(
@@ -39,6 +40,7 @@ fun IllnessConfirmationRouter(
             contentAlignment = Alignment.Center
         ) {
             IllnessConfirmationScreen(
+                isLoading = isLoading,
                 question = question,
                 onButtonClick = onButtonClick
             )

@@ -30,6 +30,7 @@ import one.reevdev.medosense.feature.consult.R
 @Composable
 fun IllnessConfirmationScreen(
     modifier: Modifier = Modifier,
+    isLoading: Boolean = false,
     question: String,
     onButtonClick: (isYes: Boolean) -> Unit,
 ) {
@@ -38,7 +39,7 @@ fun IllnessConfirmationScreen(
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (question.isEmpty())
+        if (isLoading || question.isEmpty())
             Image(
                 modifier = Modifier
                     .offset(y = 24.dp),
@@ -64,7 +65,7 @@ fun IllnessConfirmationScreen(
                 modifier = Modifier
                     .padding(20.dp)
             ) {
-                if (question.isEmpty()) {
+                if (isLoading || question.isEmpty()) {
                     Text(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(R.string.message_analyzing_your_symptoms),

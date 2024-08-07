@@ -11,7 +11,7 @@ object InstructionPrompt {
     """.trimIndent()
 
     private fun consultationRule() = """
-        Please ensure the output is structured and formatted as JSON.
+        Please ensure the output is structured and formatted as JSON (WITHOUT ANY FORMATTING PLEASE).
         
         Example response when enough information:
         ${SampleData.enoughDiggingResponse.toJson()}
@@ -23,7 +23,7 @@ object InstructionPrompt {
     """.trimIndent()
 
     private fun medConfirmationRule() = """
-        Please ensure the output is structured and formatted as JSON.
+        Please ensure the output is structured and formatted as JSON (WITHOUT ANY FORMATTING PLEASE).
         
         Example response when the medicine is correct:
         ${SampleData.medicineConfirmationResponseCorrect.toJson()}
@@ -36,8 +36,8 @@ object InstructionPrompt {
         I want you to diagnose a possible illness based on the following symptoms:
         
         1. First, analyze the symptoms and determine if the information is sufficient to make a preliminary diagnosis.
-        2. If more information is needed, specify what additional questions should be asked to gather more details.
-        3. If the symptoms are enough for a preliminary diagnosis, provide a detailed illness analysis, including possible conditions, recommended actions, and advice.
+        2. If more information is needed, specify what additional questions should be asked to gather more details (YES/NO QUESTION ONLY).
+        3. If the symptoms are enough for a preliminary diagnosis, provide a detailed illness analysis, including possible conditions, recommended actions, and advice. Also give medicines recommendation PLEASE.
         4. Always return the following values in JSON format:
             - "status": "Enough" if you have enough information to diagnose, or "NotEnough" if more information is needed.
             - "question": A follow-up question to ask the patient for further details, or null if no further questioning is required.

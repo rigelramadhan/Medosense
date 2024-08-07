@@ -43,6 +43,18 @@ class IllnessViewModel @Inject constructor(
                                     error = null,
                                     diggingResult = it
                                 )
+                            },
+                            onFailure = { e, message ->
+                                state.copy(
+                                    loadingState = LoadingState.NotLoading,
+                                    error = message ?: e.localizedMessage
+                                )
+                            },
+                            onLoading = {
+                                state.copy(
+                                    loadingState = LoadingState.DefaultLoading,
+                                    error = null
+                                )
                             }
                         )
                     }
@@ -69,6 +81,18 @@ class IllnessViewModel @Inject constructor(
                                     loadingState = LoadingState.NotLoading,
                                     error = null,
                                     diggingResult = it
+                                )
+                            },
+                            onFailure = { e, message ->
+                                state.copy(
+                                    loadingState = LoadingState.NotLoading,
+                                    error = message ?: e.localizedMessage
+                                )
+                            },
+                            onLoading = {
+                                state.copy(
+                                    loadingState = LoadingState.DefaultLoading,
+                                    error = null
                                 )
                             }
                         )

@@ -12,6 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import one.reevdev.medosense.core.domain.feature.consult.model.IllnessAnalysis
+import one.reevdev.medosense.feature.common.state.LoadingState
 import one.reevdev.medosense.feature.consult.navigation.ConsultRoutes
 import one.reevdev.medosense.feature.consult.navigation.illnessConfirmationScreen
 import one.reevdev.medosense.feature.consult.navigation.inputIllnessScreen
@@ -48,6 +49,7 @@ fun IllnessRouter(
                 }
             )
             illnessConfirmationScreen(
+                isLoading = uiState.loadingState != LoadingState.NotLoading,
                 question = uiState.diggingResult?.question.orEmpty(),
                 onButtonClick = { isYes -> viewModel.answerDiggingQuestion(isYes) }
             )

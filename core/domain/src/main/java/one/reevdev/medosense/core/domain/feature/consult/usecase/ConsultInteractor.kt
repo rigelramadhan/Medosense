@@ -8,8 +8,9 @@ import one.reevdev.medosense.core.domain.feature.consult.model.DiggingResult
 import one.reevdev.medosense.core.domain.feature.consult.model.MedicineConfirmationResult
 import one.reevdev.medosense.core.domain.feature.consult.utils.toDomain
 import one.reevdev.modesense.core.data.feature.consult.repository.ConsultRepository
+import javax.inject.Inject
 
-class ConsultInteractor(
+class ConsultInteractor @Inject constructor(
     private val consultRepository: ConsultRepository
 ) : ConsultUseCase {
     override fun initiateConsultation(symptoms: String): Flow<Result<DiggingResult>> {

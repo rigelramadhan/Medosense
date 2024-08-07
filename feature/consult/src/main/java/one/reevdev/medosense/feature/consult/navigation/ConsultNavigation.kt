@@ -6,6 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import one.reevdev.medosense.core.domain.feature.consult.model.IllnessAnalysis
+import one.reevdev.medosense.feature.consult.screen.ConsultRouter
 import one.reevdev.medosense.feature.consult.screen.analysis.AnalysisResultRouter
 import one.reevdev.medosense.feature.consult.screen.illness.IllnessRouter
 import one.reevdev.medosense.feature.consult.screen.illness.confirmation.IllnessConfirmationRouter
@@ -35,11 +36,13 @@ fun NavController.navigateToIllnessConfirmation() {
 
 fun NavGraphBuilder.illnessConfirmationScreen(
     question: String,
+    isLoading: Boolean,
     onButtonClick: (isYes: Boolean) -> Unit
 ) {
     composable<ConsultRoutes.Confirmation> {
         IllnessConfirmationRouter(
             question = question,
+            isLoading = isLoading,
             onButtonClick = onButtonClick
         )
     }
@@ -112,5 +115,15 @@ fun NavGraphBuilder.confirmMedicineScreen(
             onConfirmClick = onConfirmClick,
             onContinueClick = onContinueClick
         )
+    }
+}
+
+fun NavController.navigateToConsultRouter() {
+    navigate(ConsultRoutes.ConsultRouter)
+}
+
+fun NavGraphBuilder.consultRouter() {
+    composable<ConsultRoutes.ConsultRouter> {
+        ConsultRouter()
     }
 }

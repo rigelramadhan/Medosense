@@ -11,6 +11,9 @@ import one.reevdev.medosense.feature.common.navigation.Route
 object ConsultRoutes {
 
     @Serializable
+    data object ConsultRouter : Route
+
+    @Serializable
     data object InputIllness : Route
 
     @Serializable
@@ -20,7 +23,7 @@ object ConsultRoutes {
     data object IllnessRouter : Route
 
     @Serializable
-    data class AnalysisResult(val analysis: IllnessAnalysis) : Route
+    data class AnalysisResult(val analysis: IllnessAnalysis)
 
     @Serializable
     data object Camera : Route
@@ -41,6 +44,10 @@ val AnalysisResultParameterType = object : NavType<IllnessAnalysis>(isNullableAl
 
     override fun parseValue(value: String): IllnessAnalysis {
         return Json.decodeFromString(IllnessAnalysis.serializer(), value)
+    }
+
+    override fun serializeAsValue(value: IllnessAnalysis): String {
+        return Json.encodeToString(IllnessAnalysis.serializer(), value)
     }
 
     override fun put(bundle: Bundle, key: String, value: IllnessAnalysis) {

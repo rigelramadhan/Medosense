@@ -33,6 +33,18 @@ class MedicineViewModel @Inject constructor(
                                     loadingState = LoadingState.NotLoading,
                                     error = null,
                                 )
+                            },
+                            onFailure = { throwable, message ->
+                                state.copy(
+                                    loadingState = LoadingState.NotLoading,
+                                    error = message ?: throwable.localizedMessage.orEmpty()
+                                )
+                            },
+                            onLoading = {
+                                state.copy(
+                                    loadingState = LoadingState.DefaultLoading,
+                                    error = null
+                                )
                             }
                         )
                     }
