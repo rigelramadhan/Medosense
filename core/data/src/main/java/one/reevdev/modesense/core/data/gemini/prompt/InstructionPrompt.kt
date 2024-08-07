@@ -10,6 +10,28 @@ object InstructionPrompt {
         
     """.trimIndent()
 
+    private fun consultationRule() = """
+        Please ensure the output is structured and formatted as JSON.
+        
+        Example response when enough information:
+        ${SampleData.enoughDiggingResponse.toJson()}
+        
+        Example response when more information is needed:
+        ${SampleData.notEnoughDiggingResponse.toJson()}
+        
+        Make sure to analyze the symptoms carefully and guide the user towards seeking professional medical advice.
+    """.trimIndent()
+
+    private fun medConfirmationRule() = """
+        Please ensure the output is structured and formatted as JSON.
+        
+        Example response when the medicine is correct:
+        ${SampleData.medicineConfirmationResponseCorrect.toJson()}
+        
+        Example response when the medicine is incorrect:
+        ${SampleData.medicineConfirmationResponseIncorrect.toJson()}
+    """.trimIndent()
+
     fun initiateConstulation(symptoms: String) = """
         I want you to diagnose a possible illness based on the following symptoms:
         
@@ -24,14 +46,18 @@ object InstructionPrompt {
         Here's the information provided by the patient:
         Symptoms: "$symptoms"
         
-        Please ensure the output is structured and formatted as JSON.
+        ${consultationRule()}
+    """.trimIndent()
+
+    fun answerQuestion(isYes: Boolean) = """
+        The user answered with: ${if (isYes) "yes" else "no"}
         
-        Example response when enough information:
-        ${SampleData.enoughDiggingResponse.toJson()}
+        ${consultationRule()}
+    """.trimIndent()
+
+    fun medicineImageConfirmation() = """
+        The user wants to ask for confirmation about the medicine through an image. Here's the image.
         
-        Example response when more information is needed:
-        ${SampleData.notEnoughDiggingResponse.toJson()}
-        
-        Make sure to analyze the symptoms carefully and guide the user towards seeking professional medical advice.
+        ${medConfirmationRule()}
     """.trimIndent()
 }

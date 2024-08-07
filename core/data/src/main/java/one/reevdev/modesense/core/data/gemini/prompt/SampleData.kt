@@ -3,6 +3,7 @@ package one.reevdev.modesense.core.data.gemini.prompt
 import one.reevdev.medosense.core.common.utils.emptyString
 import one.reevdev.modesense.core.data.gemini.model.DiggingResponse
 import one.reevdev.modesense.core.data.gemini.model.IllnessAnalysis
+import one.reevdev.modesense.core.data.gemini.model.MedicineConfirmationResponse
 import one.reevdev.modesense.core.data.gemini.model.Prescription
 
 object SampleData {
@@ -31,5 +32,15 @@ object SampleData {
         status = "Enough",
         question = emptyString(),
         illnessAnalysis = illnessAnalysis
+    )
+
+    val medicineConfirmationResponseCorrect = MedicineConfirmationResponse(
+        response = "This is the analysis result of the image",
+        isCorrect = true
+    )
+
+    val medicineConfirmationResponseIncorrect = MedicineConfirmationResponse(
+        response = "This is the analysis result of the image",
+        isCorrect = false
     )
 }

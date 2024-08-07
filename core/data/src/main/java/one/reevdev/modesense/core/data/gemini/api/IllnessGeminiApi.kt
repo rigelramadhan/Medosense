@@ -1,11 +1,13 @@
 package one.reevdev.modesense.core.data.gemini.api
 
+import android.graphics.Bitmap
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.Content
 import com.google.ai.client.generativeai.type.content
 import one.reevdev.medosense.core.common.utils.jsonToObject
 import one.reevdev.modesense.core.data.BuildConfig
 import one.reevdev.modesense.core.data.gemini.model.DiggingResponse
+import one.reevdev.modesense.core.data.gemini.model.MedicineConfirmationResponse
 import one.reevdev.modesense.core.data.gemini.prompt.InstructionPrompt
 import one.reevdev.modesense.core.data.utils.toContent
 import javax.inject.Inject
@@ -30,21 +32,40 @@ class IllnessGeminiApi @Inject constructor() {
         )
     }
 
-    suspend fun initiateConsultation(
-        symptoms: String
-    ): DiggingResponse {
+    private suspend fun <T> sendGeminiMessage(
+        instruction: String,
+        outputClass: Class<T>,
+        photo: Bitmap? = null,
+    ): T {
         val chat = generativeModel.startChat(chatHistory)
-        val instruction = InstructionPrompt.initiateConstulation(symptoms)
 
         val content = content {
             text(instruction)
+            photo?.let { image(it) }
         }
         val response = chat.sendMessage(content).text.orEmpty()
         chatHistory.apply {
             add(content)
             add(response.toContent())
         }
-        val data = response.jsonToObject(DiggingResponse::class.java)
+        val data = response.jsonToObject(outputClass)
         return data
+    }
+
+    suspend fun initiateConsultation(
+        symptoms: String
+    ): DiggingResponse {
+        val instruction = InstructionPrompt.initiateConstulation(symptoms)
+        return sendGeminiMessage(instruction, DiggingResponse::class.java)
+    }
+
+    suspend fun answerQuestion(answer: Boolean): DiggingResponse {
+        val instruction = InstructionPrompt.answerQuestion(answer)
+        return sendGeminiMessage(instruction, DiggingResponse::class.java)
+    }
+
+    suspend fun medicineImageConfirmation(bitmap: Bitmap): MedicineConfirmationResponse {
+        val instruction = InstructionPrompt.medicineImageConfirmation()
+        return sendGeminiMessage(instruction, MedicineConfirmationResponse::class.java, bitmap)
     }
 }
