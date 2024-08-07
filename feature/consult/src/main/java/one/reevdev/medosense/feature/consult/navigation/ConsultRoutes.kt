@@ -21,6 +21,12 @@ object ConsultRoutes {
 
     @Serializable
     data class AnalysisResult(val analysis: IllnessAnalysis) : Route
+
+    @Serializable
+    data object Camera : Route
+
+    @Serializable
+    data object ConfirmMedicine : Route
 }
 
 val AnalysisResultParameterType = object : NavType<IllnessAnalysis>(isNullableAllowed = false) {

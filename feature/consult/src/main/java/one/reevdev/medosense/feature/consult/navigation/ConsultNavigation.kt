@@ -1,5 +1,6 @@
 package one.reevdev.medosense.feature.consult.navigation
 
+import android.net.Uri
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -9,6 +10,9 @@ import one.reevdev.medosense.feature.consult.screen.analysis.AnalysisResultRoute
 import one.reevdev.medosense.feature.consult.screen.illness.IllnessRouter
 import one.reevdev.medosense.feature.consult.screen.illness.confirmation.IllnessConfirmationRouter
 import one.reevdev.medosense.feature.consult.screen.illness.input.IllnessInputRouter
+import one.reevdev.medosense.feature.consult.screen.medicine.MedicineViewModel
+import one.reevdev.medosense.feature.consult.screen.medicine.camera.CameraRouter
+import one.reevdev.medosense.feature.consult.screen.medicine.confirmmedicine.ConfirmMedicineRouter
 import kotlin.reflect.typeOf
 
 fun NavController.navigateToInputIllness() {
@@ -69,6 +73,42 @@ fun NavGraphBuilder.analysisResultScreen(
         val analysis = it.toRoute<ConsultRoutes.AnalysisResult>().analysis
         AnalysisResultRouter(
             analysis = analysis,
+            onConfirmClick = onConfirmClick,
+            onContinueClick = onContinueClick
+        )
+    }
+}
+
+fun NavController.navigateToCamera() {
+    navigate(ConsultRoutes.Camera)
+}
+
+fun NavGraphBuilder.cameraScreen(
+    viewModel: MedicineViewModel,
+    onProceedToMedicineConfirmation: (Uri?) -> Unit
+) {
+    composable<ConsultRoutes.Camera> {
+        CameraRouter(
+            viewModel = viewModel,
+            proceedToMedicineConfirmation = onProceedToMedicineConfirmation
+        )
+    }
+}
+
+fun NavController.navigateToConfirmMedicine() {
+    navigate(ConsultRoutes.ConfirmMedicine) {
+        popUpTo(ConsultRoutes.ConfirmMedicine)
+    }
+}
+
+fun NavGraphBuilder.confirmMedicineScreen(
+    viewModel: MedicineViewModel,
+    onConfirmClick: () -> Unit,
+    onContinueClick: () -> Unit
+) {
+    composable<ConsultRoutes.ConfirmMedicine> {
+        ConfirmMedicineRouter(
+            viewModel = viewModel,
             onConfirmClick = onConfirmClick,
             onContinueClick = onContinueClick
         )
