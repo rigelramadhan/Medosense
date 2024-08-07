@@ -68,4 +68,15 @@ class IllnessGeminiApi @Inject constructor() {
         val instruction = InstructionPrompt.medicineImageConfirmation()
         return sendGeminiMessage(instruction, MedicineConfirmationResponse::class.java, bitmap)
     }
+
+    private fun resetChatHistory() {
+        chatHistory.run {
+            clear()
+            add(
+                content {
+                    text(InstructionPrompt.initializeIllnessAnalysisResponse())
+                }
+            )
+        }
+    }
 }
