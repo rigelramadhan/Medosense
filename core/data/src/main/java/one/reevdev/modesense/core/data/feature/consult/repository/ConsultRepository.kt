@@ -14,4 +14,5 @@ interface ConsultRepository {
 
     fun medicineImageConfirmation(bitmap: Bitmap): Flow<Result<MedicineConfirmationResponse>>
 
+    fun resetGemini(): Flow<Boolean>
 }

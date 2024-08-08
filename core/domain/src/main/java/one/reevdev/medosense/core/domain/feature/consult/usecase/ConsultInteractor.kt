@@ -30,4 +30,8 @@ class ConsultInteractor @Inject constructor(
             it.toDomain()
         }
     }
+
+    override fun resetGemini(): Flow<Boolean> {
+        return consultRepository.resetGemini()
+    }
 }

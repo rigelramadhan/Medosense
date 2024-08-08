@@ -69,7 +69,7 @@ class IllnessGeminiApi @Inject constructor() {
         return sendGeminiMessage(instruction, MedicineConfirmationResponse::class.java, bitmap)
     }
 
-    private fun resetChatHistory() {
+    fun resetChatHistory() {
         chatHistory.run {
             clear()
             add(

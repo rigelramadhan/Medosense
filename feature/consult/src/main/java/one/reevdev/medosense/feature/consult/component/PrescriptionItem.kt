@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import one.reevdev.medosense.core.domain.feature.consult.model.Prescription
 import one.reevdev.medosense.feature.common.theme.MedosenseTheme
+import one.reevdev.medosense.feature.common.theme.appColors
 import one.reevdev.medosense.feature.common.theme.appTypography
 
 @Composable
@@ -40,11 +41,16 @@ fun PrescriptionItem(
                         prescription.dosage,
                         prescription.frequency,
                         prescription.duration
-                    )
+                    ).filter { it.isNotBlank() }
                 ) { item ->
                     ChipText(text = item)
                 }
             }
+            Text(
+                text = prescription.notes,
+                style = appTypography().bodyMedium,
+                color = appColors().onSurface.copy(alpha = 0.75f)
+            )
         }
     }
 }

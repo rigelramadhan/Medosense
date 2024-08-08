@@ -2,10 +2,15 @@ package one.reevdev.medosense.feature.consult.screen.analysis
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -76,34 +81,63 @@ fun AnalysisResultScreen(
                             textAlign = TextAlign.Center,
                             style = appTypography().bodyMedium
                         )
-                        Card(
+                        Row(
                             modifier = Modifier
-                                .padding(top = 14.dp),
-                            colors = CardDefaults.cardColors(
-                                containerColor = appColors().primaryContainer,
-                                contentColor = appColors().onPrimaryContainer
-                            ),
-                            shape = RoundedCornerShape(16.dp)
+                                .padding(top = 12.dp)
+                                .fillMaxWidth()
+                                .height(IntrinsicSize.Max),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            Row(
+                            Card(
                                 modifier = Modifier
-                                    .padding(12.dp)
-                                    .fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically
+                                    .weight(1f)
+                                    .fillMaxHeight()
+                                    .align(Alignment.CenterVertically),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = appColors().primaryContainer,
+                                    contentColor = appColors().onPrimaryContainer
+                                ),
+                                shape = RoundedCornerShape(16.dp),
                             ) {
-                                Text(
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        modifier = Modifier
+                                            .padding(12.dp),
+                                        text = illness,
+                                        style = appTypography().titleMedium,
+                                        textAlign = TextAlign.Center
+                                    )
+                                }
+                            }
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxHeight(),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = appColors().primaryContainer,
+                                    contentColor = appColors().onPrimaryContainer
+                                ),
+                                shape = RoundedCornerShape(16.dp)
+                            ) {
+                                Column(
                                     modifier = Modifier
-                                        .weight(1f),
-                                    text = illness,
-                                    style = appTypography().titleMedium,
-                                    textAlign = TextAlign.Center
-                                )
-                                Text(
-                                    modifier = Modifier,
-                                    text = confidenceLevel.times(100).toInt().toString(),
-                                    style = appTypography().bodyLarge,
-                                    color = appColors().primary
-                                )
+                                        .padding(12.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = stringResource(R.string.label_confidence),
+                                        style = appTypography().labelSmall
+                                    )
+                                    Text(
+                                        modifier = Modifier,
+                                        text = "${confidenceLevel.times(100).toInt()}%",
+                                        style = appTypography().bodyLarge,
+                                        color = appColors().primary
+                                    )
+                                }
                             }
                         }
                     }
@@ -113,15 +147,20 @@ fun AnalysisResultScreen(
                     item {
                         Text(
                             modifier = Modifier
-                                .padding(top = 28.dp),
+                                .padding(top = 24.dp, bottom = 8.dp),
                             text = stringResource(R.string.label_recommended_medicine),
                             style = appTypography().labelMedium
                         )
                     }
 
                     itemsIndexed(prescriptions) { index, item ->
+                        val itemModifier = if (index != prescriptions.lastIndex) {
+                            Modifier.padding(bottom = 16.dp)
+                        } else {
+                            Modifier
+                        }
                         PrescriptionItem(
-                            modifier = Modifier.padding(top = 4.dp),
+                            modifier = itemModifier,
                             index = index.plus(1),
                             prescription = item
                         )
@@ -131,7 +170,7 @@ fun AnalysisResultScreen(
                 item {
                     Row(
                         modifier = Modifier
-                            .padding(top = 32.dp),
+                            .padding(top = 24.dp),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         if (prescriptions.isNotEmpty()) {
