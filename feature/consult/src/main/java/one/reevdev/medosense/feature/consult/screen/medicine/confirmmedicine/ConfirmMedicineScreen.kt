@@ -72,7 +72,8 @@ fun ConfirmMedicineScreen(
                         .padding(top = 16.dp)
                         .fillMaxWidth(),
                     text = stringResource(R.string.message_checking_photo),
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    color = appColors().onSurface
                 )
             } else {
                 Box(
