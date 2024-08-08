@@ -37,6 +37,7 @@ fun ConsultRouter(
         ) {
             illnessRouter(
                 onAnalysisResultAvailable = { analysis ->
+                    viewModel.setAnalysis(analysis)
                     navController.navigateToAnalysisResult(analysis)
                 }
             )

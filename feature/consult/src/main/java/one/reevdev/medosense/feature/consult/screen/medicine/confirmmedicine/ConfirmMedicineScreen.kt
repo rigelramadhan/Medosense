@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.PhotoCamera
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,8 +24,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import one.reevdev.medosense.feature.common.component.MedoseButton
-import one.reevdev.medosense.feature.common.component.OutlinedMedoseButton
 import one.reevdev.medosense.feature.common.theme.MedosenseTheme
 import one.reevdev.medosense.feature.common.theme.appColors
 import one.reevdev.medosense.feature.common.theme.appTypography
@@ -95,24 +91,24 @@ fun ConfirmMedicineScreen(
                         color = appColors().onTertiaryContainer
                     )
                 }
-                EqualWidthColumn(
-                    modifier = Modifier
-                        .padding(top = 24.dp)
-                        .align(Alignment.End)
-                ) {
-                    OutlinedMedoseButton(
-                        modifier = Modifier,
-                        text = stringResource(id = R.string.label_confirm),
-                        image = Icons.Rounded.PhotoCamera,
-                        onClick = onConfirmClick
-                    )
-                    MedoseButton(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        text = stringResource(id = R.string.action_continue),
-                        onClick = onContinueClick
-                    )
-                }
+//                EqualWidthColumn(
+//                    modifier = Modifier
+//                        .padding(top = 24.dp)
+//                        .align(Alignment.End)
+//                ) {
+//                    OutlinedMedoseButton(
+//                        modifier = Modifier,
+//                        text = stringResource(id = R.string.label_confirm),
+//                        image = Icons.Rounded.PhotoCamera,
+//                        onClick = onConfirmClick
+//                    )
+//                    MedoseButton(
+//                        modifier = Modifier
+//                            .fillMaxWidth(),
+//                        text = stringResource(id = R.string.action_continue),
+//                        onClick = onContinueClick
+//                    )
+//                }
             }
         }
         Image(

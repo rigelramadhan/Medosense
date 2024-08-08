@@ -52,6 +52,8 @@ object InstructionPrompt {
     fun answerQuestion(isYes: Boolean) = """
         The user answered with: ${if (isYes) "yes" else "no"}
         
+        If more information is needed, specify what additional questions should be asked to gather more details (YES/NO QUESTION ONLY)
+        
         ${consultationRule()}
     """.trimIndent()
 
