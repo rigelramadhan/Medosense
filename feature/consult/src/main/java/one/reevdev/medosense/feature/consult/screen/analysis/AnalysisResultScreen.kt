@@ -58,115 +58,135 @@ fun AnalysisResultScreen(
             painter = painterResource(id = R.drawable.illustration_result),
             contentDescription = null
         )
-        Card(
-            modifier = Modifier
-                .fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = appColors().surface),
-            shape = RoundedCornerShape(24.dp)
+        AnalysisCard(
+            illness = illness,
+            confidenceLevel = confidenceLevel,
+            prescriptions = prescriptions,
+            onConfirmClick = onConfirmClick,
+            onContinueClick = onContinueClick
+        )
+    }
+}
+
+@Composable
+fun AnalysisCard(
+    modifier: Modifier = Modifier,
+    illness: String,
+    confidenceLevel: Double,
+    prescriptions: List<Prescription>,
+    onConfirmClick: (() -> Unit)? = null,
+    onContinueClick: (() -> Unit)? = null,
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = appColors().surface),
+        shape = RoundedCornerShape(24.dp)
+    ) {
+        LazyColumn(
+            modifier = Modifier,
+            contentPadding = PaddingValues(
+                start = 16.dp,
+                top = 16.dp,
+                end = 16.dp,
+                bottom = 12.dp
+            )
         ) {
-            LazyColumn(
-                modifier = Modifier,
-                contentPadding = PaddingValues(
-                    start = 16.dp,
-                    top = 16.dp,
-                    end = 16.dp,
-                    bottom = 12.dp
-                )
-            ) {
-                item {
-                    Column {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = stringResource(R.string.message_based_on_my_analysis),
-                            textAlign = TextAlign.Center,
-                            style = appTypography().bodyMedium
-                        )
-                        Row(
+            item {
+                Column {
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(R.string.message_based_on_my_analysis),
+                        textAlign = TextAlign.Center,
+                        style = appTypography().bodyMedium
+                    )
+                    Row(
+                        modifier = Modifier
+                            .padding(top = 12.dp)
+                            .fillMaxWidth()
+                            .height(IntrinsicSize.Max),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Card(
                             modifier = Modifier
-                                .padding(top = 12.dp)
-                                .fillMaxWidth()
-                                .height(IntrinsicSize.Max),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                .weight(1f)
+                                .fillMaxHeight()
+                                .align(Alignment.CenterVertically),
+                            colors = CardDefaults.cardColors(
+                                containerColor = appColors().primaryContainer,
+                                contentColor = appColors().onPrimaryContainer
+                            ),
+                            shape = RoundedCornerShape(16.dp),
                         ) {
-                            Card(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .fillMaxHeight()
-                                    .align(Alignment.CenterVertically),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = appColors().primaryContainer,
-                                    contentColor = appColors().onPrimaryContainer
-                                ),
-                                shape = RoundedCornerShape(16.dp),
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
                             ) {
-                                Box(
-                                    modifier = Modifier.fillMaxSize(),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Text(
-                                        modifier = Modifier
-                                            .padding(12.dp),
-                                        text = illness,
-                                        style = appTypography().titleMedium,
-                                        textAlign = TextAlign.Center
-                                    )
-                                }
-                            }
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxHeight(),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = appColors().primaryContainer,
-                                    contentColor = appColors().onPrimaryContainer
-                                ),
-                                shape = RoundedCornerShape(16.dp)
-                            ) {
-                                Column(
+                                Text(
                                     modifier = Modifier
                                         .padding(12.dp),
-                                    horizontalAlignment = Alignment.CenterHorizontally
-                                ) {
-                                    Text(
-                                        text = stringResource(R.string.label_confidence),
-                                        style = appTypography().labelSmall
-                                    )
-                                    Text(
-                                        modifier = Modifier,
-                                        text = "${confidenceLevel.times(100).toInt()}%",
-                                        style = appTypography().bodyLarge,
-                                        color = appColors().primary
-                                    )
-                                }
+                                    text = illness,
+                                    style = appTypography().titleMedium,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+                        Card(
+                            modifier = Modifier
+                                .fillMaxHeight(),
+                            colors = CardDefaults.cardColors(
+                                containerColor = appColors().primaryContainer,
+                                contentColor = appColors().onPrimaryContainer
+                            ),
+                            shape = RoundedCornerShape(16.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .padding(12.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.label_confidence),
+                                    style = appTypography().labelSmall
+                                )
+                                Text(
+                                    modifier = Modifier,
+                                    text = "${confidenceLevel.times(100).toInt()}%",
+                                    style = appTypography().bodyLarge,
+                                    color = appColors().primary
+                                )
                             }
                         }
                     }
                 }
+            }
 
-                if (prescriptions.isNotEmpty()) {
-                    item {
-                        Text(
-                            modifier = Modifier
-                                .padding(top = 24.dp, bottom = 8.dp),
-                            text = stringResource(R.string.label_recommended_medicine),
-                            style = appTypography().labelMedium
-                        )
-                    }
-
-                    itemsIndexed(prescriptions) { index, item ->
-                        val itemModifier = if (index != prescriptions.lastIndex) {
-                            Modifier.padding(bottom = 16.dp)
-                        } else {
-                            Modifier
-                        }
-                        PrescriptionItem(
-                            modifier = itemModifier,
-                            index = index.plus(1),
-                            prescription = item
-                        )
-                    }
+            if (prescriptions.isNotEmpty()) {
+                item {
+                    Text(
+                        modifier = Modifier
+                            .padding(top = 24.dp, bottom = 8.dp),
+                        text = stringResource(R.string.label_recommended_medicine),
+                        style = appTypography().labelMedium
+                    )
                 }
 
+                itemsIndexed(prescriptions) { index, item ->
+                    val itemModifier = if (index != prescriptions.lastIndex) {
+                        Modifier.padding(bottom = 16.dp)
+                    } else {
+                        Modifier
+                    }
+                    PrescriptionItem(
+                        modifier = itemModifier,
+                        index = index.plus(1),
+                        prescription = item
+                    )
+                }
+            }
+
+            if (onConfirmClick != null && onContinueClick != null) {
                 item {
                     Row(
                         modifier = Modifier

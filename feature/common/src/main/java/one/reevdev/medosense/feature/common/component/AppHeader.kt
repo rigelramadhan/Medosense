@@ -9,6 +9,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,6 +28,7 @@ import one.reevdev.medosense.feature.common.theme.appTypography
 @Composable
 fun AppHeader(
     modifier: Modifier = Modifier,
+    isCentered: Boolean = true,
     title: String? = null,
     logoTint: Color = appColors().primary,
     hasBackButton: Boolean = false,
@@ -50,44 +52,56 @@ fun AppHeader(
             actionIconContentColor = appColors().primary,
         )
     }
-
-    CenterAlignedTopAppBar(
-        modifier = modifier,
-        colors = color,
-        title = {
-            if (title != null) {
-                Text(
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp),
-                    text = title,
-                    style = appTypography().headlineMedium,
-                    textAlign = TextAlign.Center
-                )
-            } else {
+    val titleComponent: @Composable () -> Unit = {
+        if (title != null) {
+            Text(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp),
+                text = title,
+                style = appTypography().headlineMedium,
+                textAlign = TextAlign.Center
+            )
+        } else {
+            Icon(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .height(28.dp),
+                painter = painterResource(id = R.drawable.ic_medose_logo),
+                contentDescription = stringResource(R.string.content_description_app_logo),
+                tint = logoTint
+            )
+        }
+    }
+    val navIcon: @Composable () -> Unit = {
+        if (hasBackButton) {
+            IconButton(onClick = { backPressedDispatcher?.onBackPressed() }) {
                 Icon(
                     modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                        .height(28.dp),
-                    painter = painterResource(id = R.drawable.ic_medose_logo),
-                    contentDescription = stringResource(R.string.content_description_app_logo),
-                    tint = logoTint
+                        .padding(start = 8.dp),
+                    painter = painterResource(id = R.drawable.ic_arrow_back_24),
+                    contentDescription = null,
                 )
             }
-        },
-        navigationIcon = {
-            if (hasBackButton) {
-                IconButton(onClick = { backPressedDispatcher?.onBackPressed() }) {
-                    Icon(
-                        modifier = Modifier
-                            .padding(start = 8.dp),
-                        painter = painterResource(id = R.drawable.ic_arrow_back_24),
-                        contentDescription = null,
-                    )
-                }
-            }
-        },
-        actions = actions
-    )
+        }
+    }
+
+    if (isCentered) {
+        CenterAlignedTopAppBar(
+            modifier = modifier,
+            colors = color,
+            title = titleComponent,
+            navigationIcon = navIcon,
+            actions = actions
+        )
+    } else {
+        TopAppBar(
+            modifier = modifier,
+            colors = color,
+            title = titleComponent,
+            navigationIcon = navIcon,
+            actions = actions
+        )
+    }
 }
 
 @Preview
@@ -100,10 +114,30 @@ private fun AppHeaderPreview() {
 
 @Preview
 @Composable
+private fun AppHeaderPreview_NotCentered() {
+    MedosenseTheme {
+        AppHeader(isCentered = false)
+    }
+}
+
+@Preview
+@Composable
 private fun AppHeaderPreview_Title() {
     MedosenseTheme {
         AppHeader(
             title = "Vehicle",
+            hasBackButton = true
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun AppHeaderPreview_Title_NotCentered() {
+    MedosenseTheme {
+        AppHeader(
+            title = "Vehicle",
+            isCentered = false,
             hasBackButton = true
         )
     }
