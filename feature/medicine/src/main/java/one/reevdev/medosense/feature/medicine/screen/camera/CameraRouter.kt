@@ -1,4 +1,4 @@
-package one.reevdev.medosense.feature.consult.screen.medicine.camera
+package one.reevdev.medosense.feature.medicine.screen.camera
 
 import android.content.Context
 import android.net.Uri
@@ -20,14 +20,14 @@ import one.reevdev.medosense.feature.common.component.AppHeader
 import one.reevdev.medosense.feature.common.screen.CameraScreen
 import one.reevdev.medosense.feature.common.state.LoadingState
 import one.reevdev.medosense.feature.common.utils.toBitmap
-import one.reevdev.medosense.feature.consult.screen.medicine.MedicineViewModel
+import one.reevdev.medosense.feature.medicine.screen.AskMedicineViewModel
 
 @Composable
 fun CameraRouter(
     modifier: Modifier = Modifier,
-    viewModel: MedicineViewModel = hiltViewModel(),
     context: Context = LocalContext.current,
-    proceedToMedicineConfirmation: (Uri?) -> Unit,
+    viewModel: AskMedicineViewModel = hiltViewModel(),
+    proceedToAnalysisResult: (Uri?) -> Unit,
 ) {
     var mediaUri by remember { mutableStateOf<Uri?>(null) }
 
@@ -41,7 +41,7 @@ fun CameraRouter(
     LaunchedEffect(key1 = mediaUri) {
         if (mediaUri != null) {
             viewModel.setPhoto(mediaUri?.toBitmap(context))
-            proceedToMedicineConfirmation(mediaUri)
+            proceedToAnalysisResult(mediaUri)
             mediaUri = null
         }
     }

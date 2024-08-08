@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="content_description_app_logo">App logo</string>
+    <string name="content_description_gallery_button">Gallery button</string>
+    <string name="content_description_flip_camera_button">Flip camera button</string>
+    <string name="content_description_capture_image">Capture image button</string>
 </resources>

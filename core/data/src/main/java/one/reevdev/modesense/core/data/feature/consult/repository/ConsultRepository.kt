@@ -3,8 +3,8 @@ package one.reevdev.modesense.core.data.feature.consult.repository
 import android.graphics.Bitmap
 import kotlinx.coroutines.flow.Flow
 import one.reevdev.medosense.core.common.Result
-import one.reevdev.modesense.core.data.gemini.model.DiggingResponse
-import one.reevdev.modesense.core.data.gemini.model.MedicineConfirmationResponse
+import one.reevdev.modesense.core.data.feature.consult.gemini.model.DiggingResponse
+import one.reevdev.modesense.core.data.feature.consult.gemini.model.MedicineConfirmationResponse
 
 interface ConsultRepository {
 

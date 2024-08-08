@@ -4,20 +4,20 @@ import android.graphics.Bitmap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import one.reevdev.medosense.core.common.Result
-import one.reevdev.modesense.core.data.gemini.GeminiDataSource
-import one.reevdev.modesense.core.data.gemini.model.DiggingResponse
-import one.reevdev.modesense.core.data.gemini.model.MedicineConfirmationResponse
+import one.reevdev.modesense.core.data.feature.consult.gemini.ConsultGeminiDataSource
+import one.reevdev.modesense.core.data.feature.consult.gemini.model.DiggingResponse
+import one.reevdev.modesense.core.data.feature.consult.gemini.model.MedicineConfirmationResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class ConsultRepositoryImpl @Inject constructor(
-    private val geminiDataSource: GeminiDataSource
+    private val consultGeminiDataSource: ConsultGeminiDataSource
 ) : ConsultRepository {
     override fun initiateConsultation(symptoms: String): Flow<Result<DiggingResponse>> = flow {
         emit(Result.Loading())
         try {
-            val response = geminiDataSource.initiateConsultation(symptoms)
+            val response = consultGeminiDataSource.initiateConsultation(symptoms)
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error(e))
@@ -27,7 +27,7 @@ class ConsultRepositoryImpl @Inject constructor(
     override fun answerDiggingQuestion(answer: Boolean): Flow<Result<DiggingResponse>> = flow {
         emit(Result.Loading())
         try {
-            val response = geminiDataSource.answerQuestion(answer)
+            val response = consultGeminiDataSource.answerQuestion(answer)
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error(e))
@@ -37,7 +37,7 @@ class ConsultRepositoryImpl @Inject constructor(
     override fun medicineImageConfirmation(bitmap: Bitmap): Flow<Result<MedicineConfirmationResponse>> = flow {
         emit(Result.Loading())
         try {
-            val response = geminiDataSource.medicineImageConfirmation(bitmap)
+            val response = consultGeminiDataSource.medicineImageConfirmation(bitmap)
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error(e))
@@ -45,7 +45,7 @@ class ConsultRepositoryImpl @Inject constructor(
     }
 
     override fun resetGemini(): Flow<Boolean> = flow {
-        geminiDataSource.resetChatHistory()
+        consultGeminiDataSource.resetChatHistory()
         emit(true)
     }
 }

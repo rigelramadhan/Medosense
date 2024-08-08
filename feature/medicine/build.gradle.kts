@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "one.reevdev.medosense.feature.consult"
+    namespace = "one.reevdev.medosense.feature.medicine"
     compileSdk = 34
 
     defaultConfig {
