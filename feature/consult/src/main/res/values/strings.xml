@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="message_tell_me">Tell me what you\'re feeling right now</string>
+    <string name="label_symptoms">Symptoms</string>
+    <string name="action_continue">Continue</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="message_analyzing_your_symptoms">Analyzing your symptoms...</string>
+    <string name="message_based_on_my_analysis">Based on my analysis, you are having</string>
+    <string name="label_recommended_medicine">Recommended Medicine</string>
+    <string name="label_confirm">Confirm</string>
+    <string name="content_description_gallery_button">Gallery button</string>
+    <string name="content_description_flip_camera_button">Flip camera button</string>
+    <string name="content_description_capture_image">Capture image button</string>
+    <string name="content_description_medicine_photo">Medicine photo</string>
+    <string name="message_checking_photo">Checking photo...</string>
+    <string name="label_confidence">Confidence</string>
+</resources>
