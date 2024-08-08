@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import one.reevdev.medosense.core.domain.feature.consult.model.IllnessAnalysis
 import one.reevdev.medosense.core.domain.feature.consult.model.MedicineConfirmationResult
 import one.reevdev.medosense.core.domain.feature.consult.usecase.ConsultUseCase
 import one.reevdev.medosense.feature.common.state.LoadingState
@@ -68,11 +69,18 @@ class MedicineViewModel @Inject constructor(
             it.copy(loadingState = isLoading)
         }
     }
+
+    fun setAnalysis(analysis: IllnessAnalysis) {
+        _uiState.update {
+            it.copy(analysis = analysis)
+        }
+    }
 }
 
 data class MedicineUiState(
     override val loadingState: LoadingState = LoadingState.NotLoading,
     override val error: String? = null,
     val photo: Bitmap? = null,
-    val result: MedicineConfirmationResult? = null
+    val result: MedicineConfirmationResult? = null,
+    val analysis: IllnessAnalysis? = null,
 ) : UiState

@@ -15,4 +15,5 @@
     <string name="content_description_medicine_photo">Medicine photo</string>
     <string name="message_checking_photo">Checking photo...</string>
     <string name="label_confidence">Confidence</string>
+    <string name="label_prescription">Prescription</string>
 </resources>
