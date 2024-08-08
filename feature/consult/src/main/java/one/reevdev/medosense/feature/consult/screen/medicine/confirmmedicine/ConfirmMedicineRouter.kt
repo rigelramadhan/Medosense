@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import one.reevdev.medosense.feature.common.component.AppHeader
+import one.reevdev.medosense.feature.common.state.LoadingState
 import one.reevdev.medosense.feature.common.theme.appColors
 import one.reevdev.medosense.feature.consult.screen.medicine.MedicineViewModel
 
@@ -40,6 +41,7 @@ fun ConfirmMedicineRouter(
                 .padding(it),
             confirmResult = uiState.result?.response.orEmpty(),
             photo = uiState.photo,
+            isLoading = uiState.loadingState != LoadingState.NotLoading,
             onConfirmClick = onConfirmClick,
             onContinueClick = onContinueClick
         )

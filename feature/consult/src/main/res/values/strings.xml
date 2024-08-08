@@ -13,4 +13,6 @@
     <string name="content_description_flip_camera_button">Flip camera button</string>
     <string name="content_description_capture_image">Capture image button</string>
     <string name="content_description_medicine_photo">Medicine photo</string>
+    <string name="message_checking_photo">Checking photo...</string>
+    <string name="label_confidence">Confidence</string>
 </resources>

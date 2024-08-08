@@ -23,7 +23,7 @@ import one.reevdev.medosense.feature.consult.screen.medicine.MedicineViewModel
 fun ConsultRouter(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    medicineViewModel: MedicineViewModel = hiltViewModel(),
+    viewModel: MedicineViewModel = hiltViewModel(),
     startDestination: Any = ConsultRoutes.IllnessRouter
 ) {
     Scaffold(
@@ -42,18 +42,24 @@ fun ConsultRouter(
             )
             analysisResultScreen(
                 onConfirmClick = { navController.navigateToCamera() },
-                onContinueClick = { navController.navigateToIllnessRouter() }
+                onContinueClick = {
+                    viewModel.resetGemini()
+                    navController.navigateToIllnessRouter()
+                }
             )
             cameraScreen(
-                viewModel = medicineViewModel,
+                viewModel = viewModel,
                 onProceedToMedicineConfirmation = {
                     navController.navigateToConfirmMedicine()
                 }
             )
             confirmMedicineScreen(
-                viewModel = medicineViewModel,
+                viewModel = viewModel,
                 onConfirmClick = { navController.navigateToCamera() },
-                onContinueClick = { navController.navigateToIllnessRouter() }
+                onContinueClick = {
+                    viewModel.resetGemini()
+                    navController.navigateToIllnessRouter()
+                }
             )
         }
     }

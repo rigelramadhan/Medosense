@@ -15,4 +15,6 @@ class GeminiDataSource @Inject constructor(
     suspend fun answerQuestion(answer: Boolean) = geminiApi.answerQuestion(answer)
 
     suspend fun medicineImageConfirmation(bitmap: Bitmap) = geminiApi.medicineImageConfirmation(bitmap)
+
+    fun resetChatHistory() = geminiApi.resetChatHistory()
 }

@@ -43,4 +43,9 @@ class ConsultRepositoryImpl @Inject constructor(
             emit(Result.Error(e))
         }
     }
+
+    override fun resetGemini(): Flow<Boolean> = flow {
+        geminiDataSource.resetChatHistory()
+        emit(true)
+    }
 }

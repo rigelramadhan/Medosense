@@ -13,4 +13,6 @@ interface ConsultUseCase {
     fun answerDiggingQuestion(answer: Boolean): Flow<Result<DiggingResult>>
 
     fun medicineImageConfirmation(bitmap: Bitmap): Flow<Result<MedicineConfirmationResult>>
+
+    fun resetGemini(): Flow<Boolean>
 }

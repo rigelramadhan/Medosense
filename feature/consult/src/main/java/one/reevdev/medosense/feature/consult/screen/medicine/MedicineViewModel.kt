@@ -32,6 +32,7 @@ class MedicineViewModel @Inject constructor(
                                 state.copy(
                                     loadingState = LoadingState.NotLoading,
                                     error = null,
+                                    result = it
                                 )
                             },
                             onFailure = { throwable, message ->
@@ -50,6 +51,10 @@ class MedicineViewModel @Inject constructor(
                     }
                 }
         }
+    }
+
+    fun resetGemini() {
+        consultUseCase.resetGemini()
     }
 
     fun setPhoto(photo: Bitmap?) {
