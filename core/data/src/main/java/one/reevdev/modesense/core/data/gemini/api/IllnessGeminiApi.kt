@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.Content
 import com.google.ai.client.generativeai.type.content
+import com.google.ai.client.generativeai.type.generationConfig
 import one.reevdev.medosense.core.common.utils.jsonToObject
 import one.reevdev.modesense.core.data.BuildConfig
 import one.reevdev.modesense.core.data.gemini.model.DiggingResponse
@@ -18,19 +19,17 @@ class IllnessGeminiApi @Inject constructor() {
     private val generativeModel: GenerativeModel by lazy {
         GenerativeModel(
             modelName = "gemini-1.5-flash",
-            apiKey = BuildConfig.apiKey
-        )
-    }
-
-    private val chatHistory: MutableList<Content> = mutableListOf()
-
-    init {
-        chatHistory.add(
-            content {
+            apiKey = BuildConfig.apiKey,
+            generationConfig = generationConfig {
+                responseMimeType = "application/json"
+            },
+            systemInstruction = content {
                 text(InstructionPrompt.initializeIllnessAnalysisResponse())
             }
         )
     }
+
+    private val chatHistory: MutableList<Content> = mutableListOf()
 
     private suspend fun <T> sendGeminiMessage(
         instruction: String,

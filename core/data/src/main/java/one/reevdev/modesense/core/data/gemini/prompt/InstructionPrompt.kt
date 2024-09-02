@@ -7,12 +7,9 @@ object InstructionPrompt {
     fun initializeIllnessAnalysisResponse() = """
         From this point on, you will be consulted by the user about his/her illness and medicines. 
         Give response as I instructed.
-        
     """.trimIndent()
 
     private fun consultationRule() = """
-        Please ensure the output is structured and formatted as JSON (WITHOUT ANY FORMATTING PLEASE).
-        
         Example response when enough information:
         ${SampleData.enoughDiggingResponse.toJson()}
         
@@ -23,8 +20,6 @@ object InstructionPrompt {
     """.trimIndent()
 
     private fun medConfirmationRule() = """
-        Please ensure the output is structured and formatted as JSON (WITHOUT ANY FORMATTING PLEASE).
-        
         Example response when the medicine is correct:
         ${SampleData.medicineConfirmationResponseCorrect.toJson()}
         
